@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 
 # User input
-print("Enter filename: ")
-filename = STDIN.gets.chomp
-range_start = ARGV[0].to_i
-range_end = ARGV[1].to_i
+filename = ARGV[0] || "nprofile"
+range_start = ARGV[1].to_i
+range_end = ARGV[2].to_i
 
 # Find and sort versions of file to track
 files = Dir.entries(Dir.pwd).select{ |f|
