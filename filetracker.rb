@@ -17,10 +17,12 @@ files = Dir.entries(Dir.pwd).select{ |f|
 
 # Compare files
 t = Time.now
+count = 0
 step = 10000
 size = files.map{ |f| f[1].size }.min.to_i
 if range_end > 0 then size = [size, range_end].min end
 offset = range_start
+puts("-------" + files.map{ |f| "------" }.join)
 puts(" Offset" + files.map{ |f| " | " + f[0].to_s.rjust(3, " ") }.join)
 puts("-------" + files.map{ |f| "------" }.join)
 while offset < size do
@@ -40,11 +42,12 @@ while offset < size do
           " | " + f[1][offset].ord.to_s.rjust(3, " ")
         }.join
       )
-      offset += 1
-      next
+      count += 1
+      break
     end
   }
   offset += 1
 end
-
+puts("-------" + files.map{ |f| "------" }.join)
+puts("Total changes: " + count.to_s)
 puts("Time elapsed: " + (1000 * (Time.now - t)).round(3).to_s + " milliseconds.")
