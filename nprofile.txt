@@ -4,7 +4,8 @@
 |                             Profile                               |
 +----------+------+-------------------------------------------------+
 |      A04 |    4 | User ID                                         |
-|      A08 |   ## | Username (null terminated)                      |
+|      A08 |   16 | Username                                        |
+|      A18 |    1 | Current palette ID                              |
 |     1244 |    8 | Killcount                                       |
 |     124C |    8 | Killcount (mines)                               |
 |     1254 |    8 | Killcount (chainguns)                           |
@@ -63,11 +64,12 @@
 |     B02A |    1 |                                                 |
 |  3B30138 |    4 |                                                 |
 +----------+------+-------------------------------------------------+
-|         Palette usage times (d, h, m, s, and 6 more bytes         |
+|         Palette usage times (d, h, m, s, and 6 more bytes)        |
 +----------+------+-------------------------------------------------+
+|      A18 |
 |     AFFD |   10 |                                                 |
 
-|     B277 |   10 | Vasquez                                         |
+|     B277 |   10 | Vasquez (55)                                    |
 
 |     B29F |   10 | Yeti                                            |
 
@@ -76,7 +78,7 @@
 |     B4BB |   10 |                                                 |
 |     B4C5 |   10 |                                                 |
 |     B4CF |   10 |                                                 |
-|     B4D9 |   10 | Vectrex                                         |
+|     B4D9 |   10 | Vectrex (116)                                   |
 |     B4E2 |   10 |                                                 |
 |     B4ED |   10 |                                                 |
 |     B4F7 |   10 |                                                 |
@@ -109,7 +111,7 @@
 |        8 |    4 | Failures                                        |
 |       12 |    4 | Successes                                       |
 |       16 |    4 |                                                 |
-|       20 |    4 |                                                 |
+|       20 |    4 | State (0 - Locked, 1 - Unlocked, 2 - Beaten)    |
 |       24 |    4 | Gold collected                                  |
 |       28 |    2 |                                                 |
 |       30 |    2 |                                                 |
