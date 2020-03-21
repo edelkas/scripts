@@ -26,7 +26,7 @@
 |     12EC |    8 | Number of keypresses (right)                    |
 |     12F4 |    8 | Number of retries                               |
 |     12FC |    8 | Number of attempts (levels)                     |
-|     1304 |    8 | Number of victories (levels)                    |
+|     1304 |    8 | Number of victories (levels) (doubled)          |
 |     130C |    8 | Number of attempts (episodes)                   |
 |     1314 |    8 | Number of victories (episodes)                  |
 +----------+------+-------------------------------------------------+
@@ -61,11 +61,30 @@
 |     13AC |    1 | Other time (seconds)                            |
 |     B022 |    1 |                                                 |
 |     B02A |    1 |                                                 |
-|     B277 |    1 | Time? (days)                                    |
-|     B278 |    1 | Time? (hours)                                   |
-|     B279 |    1 | Time? (minutes)                                 |
-|     B27A |    1 | Time? (seconds)                                 |
 |  3B30138 |    4 |                                                 |
++----------+------+-------------------------------------------------+
+|         Palette usage times (d, h, m, s, and 6 more bytes         |
++----------+------+-------------------------------------------------+
+|     AFFD |   10 |                                                 |
+
+|     B277 |   10 | Vasquez                                         |
+
+|     B29F |   10 | Yeti                                            |
+
+
+|     B4B1 |   10 |                                                 |
+|     B4BB |   10 |                                                 |
+|     B4C5 |   10 |                                                 |
+|     B4CF |   10 |                                                 |
+|     B4D9 |   10 | Vectrex                                         |
+|     B4E2 |   10 |                                                 |
+|     B4ED |   10 |                                                 |
+|     B4F7 |   10 |                                                 |
+|     B501 |   10 |                                                 |
+|     B50B |   10 | Xenon                                           |
+|     B515 |   10 |                                                 |
+|     B51F |   10 | Last official palette?                          |
+|     B529 |   10 | First custom palette?                           |
 +----------+------+-------------------------------------------------+
 |     Levels (Offset: 80D320, Blocks: 20000, Blocksize: 48B)        |
 +----------+------+-------------------------------------------------+
@@ -74,7 +93,7 @@
 |        8 |    4 | Failures                                        |
 |       12 |    4 | Successes (level mode)                          |
 |       16 |    4 | Successes (episode mode)                        |
-|       20 |    4 |                                                 |
+|       20 |    4 | State (0 - Locked, 1 - Unlocked, 2 - Beaten)    |
 |       24 |    4 | Gold collected                                  |
 |       28 |    2 |                                                 |
 |       30 |    2 |                                                 |
