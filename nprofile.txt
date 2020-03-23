@@ -60,51 +60,140 @@
 |     13AA |    1 | Other time (hours)                              |
 |     13AB |    1 | Other time (minutes)                            |
 |     13AC |    1 | Other time (seconds)                            |
-|     B022 |    1 |                                                 |
-|     B02A |    1 |                                                 |
 |  3B30138 |    4 |                                                 |
 +----------+------+-------------------------------------------------+
 |         Palette usage times (d, h, m, s, and 6 more bytes)        |
 +----------+------+-------------------------------------------------+
 |     AFFD |   10 |                                                 |
-
+|      ...
+|     B022 |    1 |                                                 |
+|     B02A |    1 |                                                 |
+|      ...
 |     B051 |   10 | BASIC (0)                                       |
 |     B05B |   10 | F7200 (1)                                       |
-|     B065 |   10 | Acid (2)
-|     B06F |   10 | Airline (3)
-|     B079 |   10 | Birthday cake (4)
-|     B083 |   10 | Blueprint (5) 
-|     B08D |   10 | Bordeaux (6)
-|     B097 |   10 | Chemical (7)
-|     B0A1 |   10 | Chococherry (8)
-|     B0AB |   10 | Classic (9)
-|     B0B5 |   10 | Clean (10)
-|     B0BF |   10 | 
-|     B0C9 |   10 | 
-|     B0D3 |   10 | 
-|     B0DD |   10 | 
-|     B0E7 |   10 | 
-|     B0F1 |   10 | 
-|     B0FB |   10 | 
-
+|     B065 |   10 | Acid (2)                                        |
+|     B06F |   10 | Airline (3)                                     |
+|     B079 |   10 | Birthday cake (4)                               |
+|     B083 |   10 | Blueprint (5)                                   |
+|     B08D |   10 | Bordeaux (6)                                    |
+|     B097 |   10 | Chemical (7)                                    |
+|     B0A1 |   10 | Chococherry (8)                                 |
+|     B0AB |   10 | Classic (9)                                     |
+|     B0B5 |   10 | Clean (10)                                      |
+|     B0BF |   10 | Console (11)                                    |
+|     B0C9 |   10 | Disassembly (12)                                |
+|     B0D3 |   10 | Dorado (13)                                     |
+|     B0DD |   10 | Dusk (14)                                       |
+|     B0E7 |   10 | Epaper (15)                                     |
+|     B0F1 |   10 | Epaper invert (16) CUT                          |
+|     B0FB |   10 | Evening (17)                                    |
+|     B105 |   10 | Galactic (18)                                   |
+|     B10F |   10 | Gothmode (19)                                   |
+|     B119 |   10 | Holosphere (20)                                 |
+|     B123 |   10 | Hot (21)                                        |
+|     B12D |   10 | Infographic (22)                                |
+|     B137 |   10 | Invert (23)                                     |
+|     B141 |   10 | Kicks (24)                                      |
+|     B14B |   10 | Lightcycle (25)                                 |
+|     B155 |   10 | M (26)                                          |
+|     B15F |   10 | Metoro (27)                                     |
+|     B169 |   10 | Midnight (28)                                   |
+|     B173 |   10 | Minus (29)                                      |
+|     B17D |   10 | Mir (30)                                        |
+|     B187 |   10 | Mono (31)                                       |
+|     B191 |   10 | Moonbase (32)                                   |
+|     B19B |   10 | Neptune (33)                                    |
+|     B1A5 |   10 | Oceanographer (34)                              |
+|     B1AF |   10 | Okinami (35)                                    |
+|     B1B9 |   10 | Orbit (36)                                      |
+|     B1C3 |   10 | Pale (37)                                       |
+|     B1CD |   10 | Papier (38) CUT                                 |
+|     B1D7 |   10 | Papier invert (39) CUT                          |
+|     B1E1 |   10 | Party (40)                                      |
+|     B1EB |   10 | Pinku (41)                                      |
+|     B1F5 |   10 | Plus (42)                                       |
+|     B1FF |   10 | Poseidon (43)                                   |
+|     B209 |   10 |                                                 |
+|     B213 |   10 |                                                 |
+|     B21D |   10 |                                                 |
+|     B227 |   10 |                                                 |
+|     B231 |   10 |                                                 |
+|     B23B |   10 |                                                 |
+|     B245 |   10 |                                                 |
+|     B24F |   10 |                                                 |
+|     B259 |   10 |                                                 |
+|     B263 |   10 |                                                 |
+|     B26D |   10 |                                                 |
 |     B277 |   10 | Vasquez (55)                                    |
-
-|     B29F |   10 | Yeti                                            |
-
-
+|     B281 |   10 | Virtual (56)                                    |
+|     B28B |   10 | Vivid (57)                                      |
+|     B295 |   10 | Wizard (58)                                     |
+|     B29F |   10 | Yeti (59)                                       |
+|     B2A9 |   10 | Pumpkin (60)                                    |
+|     B2B3 |   10 | Witchy (61)                                     |
++----------+------+-------------------------------------------------+
+|     B2BD |   10 | Argon (62)                                      |
+|     B2C7 |   10 | Autumn (63)                                     |
+|     B2D1 |   10 |                                                 |
+|     B2DB |   10 |                                                 |
+|     B2E5 |   10 |                                                 |
+|     B2EF |   10 |                                                 |
+|     B2F9 |   10 |                                                 |
+|     B303 |   10 |                                                 |
+|     B30D |   10 |                                                 |
+|     B317 |   10 |                                                 |
+|     B321 |   10 |                                                 |
+|     B32B |   10 |                                                 |
+|     B335 |   10 |                                                 |
+|     B33F |   10 |                                                 |
+|     B349 |   10 |                                                 |
+|     B353 |   10 |                                                 |
+|     B35D |   10 |                                                 |
+|     B367 |   10 |                                                 |
+|     B371 |   10 |                                                 |
+|     B37B |   10 |                                                 |
+|     B385 |   10 |                                                 |
+|     B38F |   10 |                                                 |
+|     B399 |   10 |                                                 |
+|     B3A3 |   10 |                                                 |
+|     B3AD |   10 |                                                 |
+|     B3B7 |   10 |                                                 |
+|     B3C1 |   10 |                                                 |
+|     B3CB |   10 |                                                 |
+|     B3D5 |   10 |                                                 |
+|     B3DF |   10 |                                                 |
+|     B3E9 |   10 |                                                 |
+|     B3F3 |   10 |                                                 |
+|     B3FD |   10 |                                                 |
+|     B407 |   10 |                                                 |
+|     B411 |   10 |                                                 |
+|     B41B |   10 |                                                 |
+|     B425 |   10 |                                                 |
+|     B42F |   10 |                                                 |
+|     B439 |   10 |                                                 |
+|     B443 |   10 |                                                 |
+|     B44D |   10 |                                                 |
+|     B457 |   10 |                                                 |
+|     B461 |   10 |                                                 |
+|     B46B |   10 |                                                 |
+|     B475 |   10 |                                                 |
+|     B47F |   10 |                                                 |
+|     B489 |   10 |                                                 |
+|     B493 |   10 |                                                 |
+|     B49D |   10 |                                                 |
+|     B4A7 |   10 |                                                 |
 |     B4B1 |   10 |                                                 |
 |     B4BB |   10 |                                                 |
 |     B4C5 |   10 |                                                 |
 |     B4CF |   10 |                                                 |
-|     B4D9 |   10 | Vectrex (116)                                   |
-|     B4E2 |   10 |                                                 |
+|     B4D9 |   10 |                                                 |
+|     B4E3 |   10 |                                                 |
 |     B4ED |   10 |                                                 |
 |     B4F7 |   10 |                                                 |
-|     B501 |   10 |                                                 |
-|     B50B |   10 | Xenon                                           |
-|     B515 |   10 |                                                 |
-|     B51F |   10 | Last official palette?                          |
-|     B529 |   10 | First custom palette? (124)                     |
+|     B501 |   10 | Wyvern (120)                                    |
+|     B50B |   10 | Xenon (121)                                     |
+|     B515 |   10 | Powder (122)                                    |
+|     B51F |   10 | First custom palette (123)                      |
 +----------+------+-------------------------------------------------+
 |     Levels (Offset: 80D320, Blocks: 20000, Blocksize: 48B)        |
 +----------+------+-------------------------------------------------+
