@@ -86,7 +86,7 @@ class CustomLabeledPie < Gruff::Pie
   end
 end
 CustomLabeledPie.new(800).tap do |h|
-  h.title = 'Palette Usage (Hours)'
+  h.title = 'Palette Usage'
   h.hide_legend = true
   h.theme = Gruff::Themes::PASTEL
   (0..n_official).each{ |i|

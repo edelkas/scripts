@@ -113,17 +113,17 @@
 |     B1EB |   10 | Pinku (41)                                      |
 |     B1F5 |   10 | Plus (42)                                       |
 |     B1FF |   10 | Poseidon (43)                                   |
-|     B209 |   10 |                                                 |
-|     B213 |   10 |                                                 |
-|     B21D |   10 |                                                 |
-|     B227 |   10 |                                                 |
-|     B231 |   10 |                                                 |
-|     B23B |   10 |                                                 |
-|     B245 |   10 |                                                 |
-|     B24F |   10 |                                                 |
-|     B259 |   10 |                                                 |
-|     B263 |   10 |                                                 |
-|     B26D |   10 |                                                 |
+|     B209 |   10 | Pulse (44)                                      |
+|     B213 |   10 | Quench (45)                                     |
+|     B21D |   10 | Replicant (46)                                  |
+|     B227 |   10 | Retro (47)                                      |
+|     B231 |   10 | Shift (48)                                      |
+|     B23B |   10 | Shock (49)                                      |
+|     B245 |   10 | Simulator (50)                                  |
+|     B24F |   10 | Solarized Dark (51)                             |
+|     B259 |   10 | Solarized Light (52)                            |
+|     B263 |   10 | Supernavy (53)                                  |
+|     B26D |   10 | Toxin (54)                                      |
 |     B277 |   10 | Vasquez (55)                                    |
 |     B281 |   10 | Virtual (56)                                    |
 |     B28B |   10 | Vivid (57)                                      |
@@ -134,62 +134,62 @@
 +----------+------+-------------------------------------------------+
 |     B2BD |   10 | Argon (62)                                      |
 |     B2C7 |   10 | Autumn (63)                                     |
-|     B2D1 |   10 |                                                 |
-|     B2DB |   10 |                                                 |
-|     B2E5 |   10 |                                                 |
-|     B2EF |   10 |                                                 |
-|     B2F9 |   10 |                                                 |
-|     B303 |   10 |                                                 |
-|     B30D |   10 |                                                 |
-|     B317 |   10 |                                                 |
-|     B321 |   10 |                                                 |
-|     B32B |   10 |                                                 |
-|     B335 |   10 |                                                 |
-|     B33F |   10 |                                                 |
-|     B349 |   10 |                                                 |
-|     B353 |   10 |                                                 |
-|     B35D |   10 |                                                 |
-|     B367 |   10 |                                                 |
-|     B371 |   10 |                                                 |
-|     B37B |   10 |                                                 |
-|     B385 |   10 |                                                 |
-|     B38F |   10 |                                                 |
-|     B399 |   10 |                                                 |
-|     B3A3 |   10 |                                                 |
-|     B3AD |   10 |                                                 |
-|     B3B7 |   10 |                                                 |
-|     B3C1 |   10 |                                                 |
-|     B3CB |   10 |                                                 |
-|     B3D5 |   10 |                                                 |
-|     B3DF |   10 |                                                 |
-|     B3E9 |   10 |                                                 |
-|     B3F3 |   10 |                                                 |
-|     B3FD |   10 |                                                 |
-|     B407 |   10 |                                                 |
-|     B411 |   10 |                                                 |
-|     B41B |   10 |                                                 |
-|     B425 |   10 |                                                 |
-|     B42F |   10 |                                                 |
-|     B439 |   10 |                                                 |
-|     B443 |   10 |                                                 |
-|     B44D |   10 |                                                 |
-|     B457 |   10 |                                                 |
-|     B461 |   10 |                                                 |
-|     B46B |   10 |                                                 |
-|     B475 |   10 |                                                 |
-|     B47F |   10 |                                                 |
-|     B489 |   10 |                                                 |
-|     B493 |   10 |                                                 |
-|     B49D |   10 |                                                 |
-|     B4A7 |   10 |                                                 |
-|     B4B1 |   10 |                                                 |
-|     B4BB |   10 |                                                 |
-|     B4C5 |   10 |                                                 |
-|     B4CF |   10 |                                                 |
-|     B4D9 |   10 |                                                 |
-|     B4E3 |   10 |                                                 |
-|     B4ED |   10 |                                                 |
-|     B4F7 |   10 |                                                 |
+|     B2D1 |   10 | Berry (64)                                      |
+|     B2DB |   10 | Bloodmoon (65)                                  |
+|     B2E5 |   10 | Brink (66)                                      |
+|     B2EF |   10 | Cacao (67)                                      |
+|     B2F9 |   10 | Champagne (68)                                  |
+|     B303 |   10 | Concrete (69)                                   |
+|     B30D |   10 | Cowboy (70)                                     |
+|     B317 |   10 | Dagobah (71)                                    |
+|     B321 |   10 | Debugger (72)                                   |
+|     B32B |   10 | Delicate (73)                                   |
+|     B335 |   10 | Desert world (74)                               |
+|     B33F |   10 | Elephant (75)                                   |
+|     B349 |   10 | Florist (76)                                    |
+|     B353 |   10 | Formal (77)                                     |
+|     B35D |   10 | Gatecrasher (78)                                |
+|     B367 |   10 | Grapefrukt (79)                                 |
+|     B371 |   10 | Grappa (80)                                     |
+|     B37B |   10 | Gunmetal (81)                                   |
+|     B385 |   10 | Hazard (82)                                     |
+|     B38F |   10 | Heirloom (83)                                   |
+|     B399 |   10 | Hope (84)                                       |
+|     B3A3 |   10 | Hyperspace (85)                                 |
+|     B3AD |   10 | Ice world (86)                                  |
+|     B3B7 |   10 | Incorporated (87)                               |
+|     B3C1 |   10 | Jaune (88)                                      |
+|     B3CB |   10 | Juicy (89)                                      |
+|     B3D5 |   10 | Lab (90)                                        |
+|     B3DF |   10 | Lava world (91)                                 |
+|     B3E9 |   10 | Lemonade (92)                                   |
+|     B3F3 |   10 | Lichen (93)                                     |
+|     B3FD |   10 | Line (94) CUT                                   |
+|     B407 |   10 | Machine (95)                                    |
+|     B411 |   10 | Mustard (96)                                    |
+|     B41B |   10 | Mute (97)                                       |
+|     B425 |   10 | Nemk (98)                                       |
+|     B42F |   10 | Neutrality (99)                                 |
+|     B439 |   10 | Noctis (100)                                    |
+|     B443 |   10 | Petal (101)                                     |
+|     B44D |   10 | PICO-8 (102)                                    |
+|     B457 |   10 | Porphyrous (103)                                |
+|     B461 |   10 | QDUST (104)                                     |
+|     B46B |   10 | Regal (105)                                     |
+|     B475 |   10 | Rust (106)                                      |
+|     B47F |   10 | Sakura (107)                                    |
+|     B489 |   10 | Sinister (108)                                  |
+|     B493 |   10 | Starfighter (109)                               |
+|     B49D |   10 | Sunset (110)                                    |
+|     B4A7 |   10 | Synergy (111)                                   |
+|     B4B1 |   10 | Talisman (112)                                  |
+|     B4BB |   10 | Toothpaste (113)                                |
+|     B4C5 |   10 | TR-808 (114)                                    |
+|     B4CF |   10 | Tycho (115) CUT                                 |
+|     B4D9 |   10 | Vectrex (116)                                   |
+|     B4E3 |   10 | Vintage (117)                                   |
+|     B4ED |   10 | Void (118)                                      |
+|     B4F7 |   10 | Waka (119)                                      |
 |     B501 |   10 | Wyvern (120)                                    |
 |     B50B |   10 | Xenon (121)                                     |
 |     B515 |   10 | Powder (122)                                    |
@@ -211,7 +211,7 @@
 |       40 |    4 | Rank (broken)                                   |
 |       44 |    4 | Replay ID                                       |
 +----------+------+-------------------------------------------------+
-|      Episodes (Offset: 8F794F, Blocks: 3360, Blocksize: 48B)      |
+|      Episodes (Offset: 8F7920, Blocks: 3360, Blocksize: 48B)      |
 +----------+------+-------------------------------------------------+
 |        0 |    4 | Episode ID                                      |
 |        4 |    4 | Attempts                                        |
