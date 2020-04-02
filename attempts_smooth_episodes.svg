@@ -1,0 +1,76 @@
+<svg width='2000' height='500' viewBox='0 0 2000 500' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:a3='http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/' a3:scriptImplementation='Adobe'>
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<!-- Created with SVG::Graph -->
+<!-- SVG::Graph by Sean E. Russell -->
+<!-- Losely based on SVG::TT::Graph for Perl by Leo Lapworth & Stephan Morgan -->
+<!-- //////////////////////////////////////////////////////////////////-->
+<defs/>
+<!--SVG Background-->
+<rect width='2000' height='500' x='0' y='0' class='svgBackground' style='fill:#ffffff;'/>
+<g transform='translate( 50.199999999999996 26 )'>
+<rect x='0' y='0' width='1896.8' height='433' class='graphBackground' style='fill:#f0f0f0;'/>
+<path d='M 0 433 h1896.8' class='axis' id='yAxis' style='stroke: #000000; stroke-width: 1px;'/>
+<path d='M 0.0 0 v433' class='axis' id='xAxis' style='stroke: #000000; stroke-width: 1px;'/>
+<text class='xAxisLabels' x='49.91578947368421' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='149.7473684210526' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='249.57894736842104' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='349.4105263157894' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='449.24210526315784' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='549.0736842105263' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='648.9052631578946' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='748.7368421052631' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='848.5684210526315' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='948.3999999999999' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='1048.2315789473685' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='1148.0631578947368' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='1247.8947368421052' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='1347.7263157894736' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='1447.5578947368422' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='1547.3894736842105' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='1647.221052631579' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='1747.0526315789473' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text class='xAxisLabels' x='1846.8842105263157' y='448' style='text-anchor: middle; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: middle'></text>
+<text x='-3' y='437.0' class='yAxisLabels' style='text-anchor: end; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: end'>0.00</text>
+<text x='-3' y='382.875' class='yAxisLabels' style='text-anchor: end; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: end'>42.00</text>
+<path d='M0 378.875 h1896.8' class='guideLines' style='stroke: #666666; stroke-width: 1px; stroke-dasharray: 5 5;'/>
+<text x='-3' y='328.75' class='yAxisLabels' style='text-anchor: end; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: end'>84.00</text>
+<path d='M0 324.75 h1896.8' class='guideLines' style='stroke: #666666; stroke-width: 1px; stroke-dasharray: 5 5;'/>
+<text x='-3' y='274.625' class='yAxisLabels' style='text-anchor: end; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: end'>126.00</text>
+<path d='M0 270.625 h1896.8' class='guideLines' style='stroke: #666666; stroke-width: 1px; stroke-dasharray: 5 5;'/>
+<text x='-3' y='220.5' class='yAxisLabels' style='text-anchor: end; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: end'>168.00</text>
+<path d='M0 216.5 h1896.8' class='guideLines' style='stroke: #666666; stroke-width: 1px; stroke-dasharray: 5 5;'/>
+<text x='-3' y='166.375' class='yAxisLabels' style='text-anchor: end; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: end'>210.00</text>
+<path d='M0 162.375 h1896.8' class='guideLines' style='stroke: #666666; stroke-width: 1px; stroke-dasharray: 5 5;'/>
+<text x='-3' y='112.25' class='yAxisLabels' style='text-anchor: end; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: end'>252.00</text>
+<path d='M0 108.25 h1896.8' class='guideLines' style='stroke: #666666; stroke-width: 1px; stroke-dasharray: 5 5;'/>
+<text x='-3' y='58.125' class='yAxisLabels' style='text-anchor: end; fill: #000000; font-size: 12px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;text-anchor: end'>294.00</text>
+<path d='M0 54.125 h1896.8' class='guideLines' style='stroke: #666666; stroke-width: 1px; stroke-dasharray: 5 5;'/>
+<rect x='0.0' y='293.82142857142856' width='99.83157894736841' height='139.17857142857144' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='99.83157894736841' y='337.9590773809524' width='99.83157894736841' height='95.04092261904762' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='199.66315789473683' y='342.79166666666663' width='99.83157894736841' height='90.20833333333334' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='299.4947368421052' y='388.9267857142857' width='99.83157894736841' height='44.07321428571429' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='399.32631578947365' y='376.9419642857143' width='99.83157894736841' height='56.05803571428572' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='499.1578947368421' y='377.1997023809524' width='99.83157894736841' height='55.80029761904761' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='598.9894736842105' y='392.3418154761905' width='99.83157894736841' height='40.658184523809524' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='698.8210526315789' y='335.8327380952381' width='99.83157894736841' height='97.16726190476192' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='798.6526315789473' y='244.5934523809524' width='99.83157894736841' height='188.4065476190476' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='898.4842105263157' y='248.33065476190475' width='99.83157894736841' height='184.66934523809525' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='998.3157894736842' y='245.88214285714287' width='99.83157894736841' height='187.11785714285713' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='1098.1473684210525' y='201.87336309523812' width='99.83157894736841' height='231.12663690476188' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='1197.978947368421' y='148.5860119047619' width='99.83157894736841' height='284.4139880952381' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='1297.8105263157893' y='163.21264880952384' width='99.83157894736841' height='269.78735119047616' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='1397.6421052631579' y='274.87767857142853' width='99.83157894736841' height='158.12232142857144' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='1497.4736842105262' y='108.4433035714286' width='99.83157894736841' height='324.5566964285714' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='1597.3052631578946' y='242.4671130952381' width='99.83157894736841' height='190.5328869047619' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='1697.136842105263' y='250.71473214285717' width='99.83157894736841' height='182.28526785714283' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<rect x='1796.9684210526314' y='205.28839285714284' width='99.83157894736841' height='227.71160714285716' class='fill1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<g/>
+</g>
+<text x='1000' y='16' class='mainTitle' style='text-anchor: middle; fill: #000000; font-size: 16px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;'>Episode attempts (Total: 47917.0) Smoothing: 20</text>
+<text x='998.6' y='488' class='xAxisTitle' style='text-anchor: middle; fill: #ff0000; font-size: 14px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;'>Attempts</text>
+<text x='29.4' y='19.0' class='yAxisTitle' style='fill: #ff0000; text-anchor: middle; font-size: 14px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;'>Episode</text>
+<g transform='translate(1957.0 36)'>
+<rect x='0' y='0' width='12' height='12' class='key1' style='fill: #ff0000; fill-opacity: 0.5; stroke: none; stroke-width: 0.5px;'/>
+<text x='17' y='12' class='keyText' style='fill: #000000; text-anchor:start; font-size: 10px; font-family: &quot;Arial&quot;, sans-serif; font-weight: normal;'>Data</text>
+</g>
+</svg>
