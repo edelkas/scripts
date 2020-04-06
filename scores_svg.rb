@@ -1,7 +1,8 @@
-# To use, install the svg-graph gem:
-# Linux: sudo gem install svg-graph
+# To use, install the svg-graph and terminal-table gems:
+# Linux: sudo gem install svg-graph terminal-table
 
 require 'svggraph'
+require 'terminal-table'
 
 # Constants
 o_l = "80D320".to_i(16)
@@ -73,37 +74,81 @@ data_e = data_e.take(limit).map{ |s| [s[0].to_f / 1000, s[1], s[2]] }
 # Gather relevant stats
 lvls = {
   :scored => {
-    :locked => raw_l.map{ |s| s[0] < 3000000 && s[2] == 0 }.count(true),
-    :unlocked => raw_l.map{ |s| s[0] < 3000000 && s[2] == 1 }.count(true),
-    :beaten => raw_l.map{ |s| s[0] < 3000000 && s[2] == 2 }.count(true)
+    :locked => raw_l.select{ |s| s[0] < 3000000 && s[2] == 0 },
+    :unlocked => raw_l.select{ |s| s[0] < 3000000 && s[2] == 1 },
+    :beaten => raw_l.select{ |s| s[0] < 3000000 && s[2] == 2 }
   },
   :unscored => {
-    :locked => raw_l.map{ |s| s[0] > 3000000 && s[2] == 0 }.count(true),
-    :unlocked => raw_l.map{ |s| s[0] > 3000000 && s[2] == 1 }.count(true),
-    :beaten => raw_l.map{ |s| s[0] > 3000000 && s[2] == 2 }.count(true)
+    :locked => raw_l.select{ |s| s[0] > 3000000 && s[2] == 0 },
+    :unlocked => raw_l.select{ |s| s[0] > 3000000 && s[2] == 1 },
+    :beaten => raw_l.select{ |s| s[0] > 3000000 && s[2] == 2 }
   }
 }
 eps = {
   :scored => {
-    :locked => raw_e.map{ |s| s[0] < 3000000 && s[2] == 0 }.count(true),
-    :unlocked => raw_e.map{ |s| s[0] < 3000000 && s[2] == 1 }.count(true),
-    :beaten => raw_e.map{ |s| s[0] < 3000000 && s[2] == 2 }.count(true)
+    :locked => raw_e.select{ |s| s[0] < 3000000 && s[2] == 0 },
+    :unlocked => raw_e.select{ |s| s[0] < 3000000 && s[2] == 1 },
+    :beaten => raw_e.select{ |s| s[0] < 3000000 && s[2] == 2 }
   },
   :unscored => {
-    :locked => raw_e.map{ |s| s[0] > 3000000 && s[2] == 0 }.count(true),
-    :unlocked => raw_e.map{ |s| s[0] > 3000000 && s[2] == 1 }.count(true),
-    :beaten => raw_e.map{ |s| s[0] > 3000000 && s[2] == 2 }.count(true)
+    :locked => raw_e.select{ |s| s[0] > 3000000 && s[2] == 0 },
+    :unlocked => raw_e.select{ |s| s[0] > 3000000 && s[2] == 1 },
+    :beaten => raw_e.select{ |s| s[0] > 3000000 && s[2] == 2 }
   }
 }
-puts "Total levels: ".ljust(36, " ") + raw_l.size.to_s
-puts "Total unlocked levels: ".ljust(36, " ") + (lvls[:scored][:unlocked] + lvls[:unscored][:unlocked] + lvls[:scored][:beaten] + lvls[:unscored][:beaten]).to_s
-puts "Total beaten levels: ".ljust(36, " ") + (lvls[:scored][:beaten] + lvls[:unscored][:beaten]).to_s
-puts "Total beaten BUT unscored levels: ".ljust(36, " ") + lvls[:unscored][:beaten].to_s
-puts "----------------------------------------"
-puts "Total episodes: ".ljust(36, " ") + raw_e.size.to_s
-puts "Total unlocked episodes: ".ljust(36, " ") + (eps[:scored][:unlocked] + eps[:unscored][:unlocked] + eps[:scored][:beaten] + eps[:unscored][:beaten]).to_s
-puts "Total beaten episodes: ".ljust(36, " ") + (eps[:scored][:beaten] + eps[:unscored][:beaten]).to_s
-puts "Total beaten BUT unscored episodes: ".ljust(36, " ") + eps[:unscored][:beaten].to_s
+
+table = Terminal::Table.new do |t|
+  t.style = {border_x: "=", border_i: "x"}
+  t << ["LEVELS", "Locked", "Unlocked", "Beaten", "Total"]
+  t << :separator
+  t << [
+    "Scored",
+    lvls[:scored][:locked].size,
+    lvls[:scored][:unlocked].size,
+    lvls[:scored][:beaten].size,
+    lvls[:scored].reduce(0){ |sum, s| sum += s[1].size }
+  ]
+  t << [
+    "Unscored",
+    lvls[:unscored][:locked].size,
+    lvls[:unscored][:unlocked].size,
+    lvls[:unscored][:beaten].size,
+    lvls[:unscored].reduce(0){ |sum, s| sum += s[1].size }
+  ]
+  t << [
+    "Total",
+    lvls[:scored][:locked].size + lvls[:unscored][:locked].size,
+    lvls[:scored][:unlocked].size + lvls[:unscored][:unlocked].size,
+    lvls[:scored][:beaten].size + lvls[:unscored][:beaten].size,
+    lvls[:scored].reduce(0){ |sum, s| sum += s[1].size } + lvls[:unscored].reduce(0){ |sum, s| sum += s[1].size }
+  ]
+  t << :separator
+  t << ["EPISODES", "Locked", "Unlocked", "Beaten", "Total"]
+  t << :separator
+  t << [
+    "Scored",
+    eps[:scored][:locked].size,
+    eps[:scored][:unlocked].size,
+    eps[:scored][:beaten].size,
+    eps[:scored].reduce(0){ |sum, s| sum += s[1].size }
+  ]
+  t << [
+    "Unscored",
+    eps[:unscored][:locked].size,
+    eps[:unscored][:unlocked].size,
+    eps[:unscored][:beaten].size,
+    eps[:unscored].reduce(0){ |sum, s| sum += s[1].size }
+  ]
+  t << [
+    "Total",
+    eps[:scored][:locked].size + eps[:unscored][:locked].size,
+    eps[:scored][:unlocked].size + eps[:unscored][:unlocked].size,
+    eps[:scored][:beaten].size + eps[:unscored][:beaten].size,
+    eps[:scored].reduce(0){ |sum, s| sum += s[1].size } + eps[:unscored].reduce(0){ |sum, s| sum += s[1].size }
+  ]
+end
+puts table
+#puts lvls[:unscored][:beaten].map{ |e| e[1] }.join(", ")
 
 # Bar plot (SVG)
 def create_svg(filename, title, x, y, data, labels)
