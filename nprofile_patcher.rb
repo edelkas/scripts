@@ -1,6 +1,8 @@
-# To use, install the svg-graph and terminal-table gems:
-# Linux: sudo gem install svg-graph terminal-table
+# To use, install the terminal-table gem:
+# Linux: sudo gem install terminal-table
 
+require 'open-uri'
+require 'json'
 require 'terminal-table'
 
 # Constants
@@ -229,19 +231,46 @@ def print_table
   puts table
 end
 
+def url(id, i)
+  "https://dojo.nplusplus.ninja/prod/steam/get_scores?steam_id=%s&steam_auth=&level_id=%s" % [id, i]
+end
+
 def patch_scores(types = [])
-  t = Time.now
   return false if !File.file?("nprofile")
   file = File.binread("nprofile")
+  print("Introduce your SteamID64: ")
+  id = STDIN.gets.chomp.to_i
+  t = Time.now
 
   if types.empty? || types.include?(:lvl_scored_locked)
-    $lvls[:scored][:unlocked].each{ |s|
-      file[combine_r(r_l(s[3]), 20..23)] = _pack(2,4)
-    }
+    print "Patching scored locked levels..."
+    $lvls[:scored][:locked].each{ |s| file[combine_r(r_l(s[3]), 20..23)] = _pack(2,4) }
+    print " patched.\n"
+  end
+  if types.empty? || types.include?(:lvl_scored_unlocked)
+    print "Patching scored unbeaten levels..."
+    $lvls[:scored][:unlocked].each{ |s| file[combine_r(r_l(s[3]), 20..23)] = _pack(2,4) }
+    print " patched.\n"
+  end
+  if types.empty? || types.include?(:ep_scored_locked)
+    print "Patching scored locked episodes..."
+    $eps[:scored][:locked].each{ |s| file[combine_r(r_l(s[3]), 20..23)] = _pack(2,4) }
+    print " patched.\n"
+  end
+  if types.empty? || types.include?(:ep_scored_unlocked)
+    print "Patching scored unbeaten episodes..."
+    $eps[:scored][:unlocked].each{ |s| file[combine_r(r_l(s[3]), 20..23)] = _pack(2,4) }
+    print " patched.\n"
+  end
+  if types.empty? || types.include?(:lvl_unscored_beaten)
+    print "Patching unscored beaten levels..."
+    #$lvls[:unscored][:beaten].each{ |s| file[combine_r(r_l(s[3]), 20..23)] = _pack(2,4); print "." }
+    print " patched.\n"
   end
 
   File.binwrite("nprofile", file)
   print("nprofile patched successfully, time: " + (1000 * (Time.now - t)).round(3).to_s + "ms.\n")
+  return true
 end
 
 def main
@@ -265,7 +294,11 @@ def main
           puts e[1].map{ |s| s[1] }.join(", ")
         }
       when "patch"
-        patch_scores
+        if !patch_scores
+          puts "nprofile file not found."
+          puts "nprofile file needs to be on the script's folder, and with that name."
+          return
+        end
       else
         print_usage
     end
