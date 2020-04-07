@@ -49,25 +49,19 @@ def _unpack(bytes)
 end
 file = File.binread("nprofile")
 
-unscored_l = []
 raw_l = ids_l.map{ |id, l|
   r = (o_l + id * d..o_l + (id + 1) * d - 1)
   [_unpack(file[r][36..39]), ids_l[id], _unpack(file[r][20..23])]
 }
-data_l = raw_l.map{ |s|
-  s[0] > 3000000 ? (if s[2] == 2 then unscored_l << s[1] end; nil) : s
-}.compact.sort_by{ |s| -s[0] }
+data_l = raw_l.map{ |s| s[0] > 3000000 ? nil : s }.compact.sort_by{ |s| -s[0] }
 total_l = data_l.sum{ |s| s[0] }.to_f / 1000
 data_l = data_l.take(limit).map{ |s| [s[0].to_f / 1000, s[1], s[2]] }
 
-unscored_e = []
 raw_e = ids_e.map{ |id, e|
   r = (o_e + id * d..o_e + (id + 1) * d - 1)
   [_unpack(file[r][36..39]), ids_e[id], _unpack(file[r][20..23])]
 }
-data_e = raw_e.map{ |s|
-  s[0] > 3000000 ? (if s[2] == 2 then unscored_e << s[1] end; nil) : s
-}.compact.sort_by{ |s| -s[0] }
+data_e = raw_e.map{ |s| s[0] > 3000000 ? nil : s }.compact.sort_by{ |s| -s[0] }
 total_e = data_e.sum{ |s| s[0] }.to_f / 1000
 data_e = data_e.take(limit).map{ |s| [s[0].to_f / 1000, s[1], s[2]] }
 
@@ -148,7 +142,7 @@ table = Terminal::Table.new do |t|
   ]
 end
 puts table
-#puts lvls[:unscored][:beaten].map{ |e| e[1] }.join(", ")
+puts lvls[:scored][:unlocked].map{ |e| e[1] }.join(", ")
 
 # Bar plot (SVG)
 def create_svg(filename, title, x, y, data, labels)
