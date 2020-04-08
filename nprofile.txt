@@ -107,7 +107,7 @@
 |     B1AF |   10 | Okinami (35)                                    |
 |     B1B9 |   10 | Orbit (36)                                      |
 |     B1C3 |   10 | Pale (37)                                       |
-|     B1CD |   10 | Papier (38) CUT                                 |
+|     B1CD |   10 | Papier (38)                                     |
 |     B1D7 |   10 | Papier invert (39) CUT                          |
 |     B1E1 |   10 | Party (40)                                      |
 |     B1EB |   10 | Pinku (41)                                      |
