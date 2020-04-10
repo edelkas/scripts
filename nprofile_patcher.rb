@@ -213,6 +213,7 @@ def print_usage
   puts "       list - Lists erroneous scores."
   puts "      patch - Correct missing scores in savefile."
   puts " patch-full - Update all scores in savefile."
+  puts "       exit - Exit the program."
   puts "#{"NOTES".bold}:"
   puts "    * Place the savefile on the script's folder to use."
   puts "    * Please backup your savefile before patching it."
@@ -273,7 +274,7 @@ end
 
 def download(id, i, ep = false)
   att ||= 0
-  ret = open("https://dojo.nplusplus.ninja/prod/steam/get_scores?steam_id=#{id}&steam_auth=&#{ep ? "episode" : "level"}_id=#{i}").read
+  ret = URI.open("https://dojo.nplusplus.ninja/prod/steam/get_scores?steam_id=#{id}&steam_auth=&#{ep ? "episode" : "level"}_id=#{i}").read
   if ret == '-1337'
     print("The Steam ID is not active, please open N++.\n")
     (att += 1) < $retries ? raise : (return -1)
@@ -352,13 +353,13 @@ def patch_scores_full
     ok = patch_score(id, file, s[1], false) && ok
     print "Patching all levels..." + (i + 1).to_s + "/" + $raw_l.select{ |s| $ids_l.key?(tab) ? $ids_l[tab].include?(s[1]) : true }.size.to_s + "   \r"
   }
-  puts "" unless $raw_l.size == 0
+  puts ""
 
   $raw_e.select{ |s| $ids_e.key?(tab) ? $ids_e[tab].include?(s[1]) : true }.each_with_index{ |s, i|
     ok = patch_score(id, file, s[1], true) && ok
     print "Patching all episodes..." + (i + 1).to_s + "/" + $raw_e.select{ |s| $ids_e.key?(tab) ? $ids_e[tab].include?(s[1]) : true }.size.to_s + "   \r"
   }
-  puts "" unless $raw_e.size == 0
+  puts ""
 
   update_scores
   message = success ? "successfully" : "partially"
@@ -403,44 +404,52 @@ def print_scores
 end
 
 def main
-  if !parse_savefile
-    puts "nprofile file not found."
-    puts "nprofile file needs to be on the script's folder, and with that name."
-    return
-  end
   if ARGV.size == 0
-    print("Introduce command: ")
-    command = STDIN.gets.chomp
+    command = nil
   else
     command = ARGV[0]
   end
-  case command
-    when "summary"
-      print_tables
-      parse_errors
-      print_errors
-    when "list"
-      parse_errors
-      $errors.each{ |e|
-        puts "* " + e[0][0..-2] + ":"
-        puts e[1].map{ |s| s[0] }.join(", ")
-      }
-    when "patch"
-      if !patch_scores
-        puts "nprofile file not found."
-        puts "nprofile file needs to be on the script's folder, and with that name."
+  loop do
+    if !parse_savefile
+      puts "nprofile file not found."
+      puts "nprofile file needs to be on the script's folder, and with that name."
+      return
+    end
+    if command.nil?
+      print("Introduce command: ")
+      command = STDIN.gets.chomp
+    end
+    case command
+      when "summary"
+        print_tables
+        parse_errors
+        print_errors
+      when "list"
+        parse_errors
+        $errors.each{ |e|
+          puts "* " + e[0][0..-2] + ":"
+          puts e[1].map{ |s| s[0] }.join(", ")
+        }
+      when "patch"
+        if !patch_scores
+          puts "nprofile file not found."
+          puts "nprofile file needs to be on the script's folder, and with that name."
+          return
+        end
+      when "patch-full"
+        if !patch_scores_full
+          puts "nprofile file not found."
+          puts "nprofile file needs to be on the script's folder, and with that name."
+          return
+        end
+      when "scores"
+        print_scores
+      when "exit"
         return
-      end
-    when "patch-full"
-      if !patch_scores_full
-        puts "nprofile file not found."
-        puts "nprofile file needs to be on the script's folder, and with that name."
-        return
-      end
-    when "scores"
-      print_scores
-    else
-      print_usage
+      else
+        print_usage
+    end
+    command = nil
   end
 end
 
