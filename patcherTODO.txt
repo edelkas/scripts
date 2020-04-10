@@ -1,0 +1,8 @@
+Todo:
+
+- Consider: When patching, don't take the server sided score but the maximum
+  between the local and the server one.
+- To deal with when level submission was off, we could patch level scores
+  by looking up the episode runs and extracting the level times form there.
+
+
