@@ -350,13 +350,13 @@ def patch_scores_full
 
   $raw_l.select{ |s| $ids_l.key?(tab) ? $ids_l[tab].include?(s[1]) : true }.each_with_index{ |s, i|
     ok = patch_score(id, file, s[1], false) && ok
-    print "Patching all levels..." + (i + 1).to_s + "/" + $raw_l.size.to_s + "   \r"
+    print "Patching all levels..." + (i + 1).to_s + "/" + $raw_l.select{ |s| $ids_l.key?(tab) ? $ids_l[tab].include?(s[1]) : true }.size.to_s + "   \r"
   }
   puts "" unless $raw_l.size == 0
 
   $raw_e.select{ |s| $ids_e.key?(tab) ? $ids_e[tab].include?(s[1]) : true }.each_with_index{ |s, i|
     ok = patch_score(id, file, s[1], true) && ok
-    print "Patching all episodes..." + (i + 1).to_s + "/" + $raw_e.size.to_s + "   \r"
+    print "Patching all episodes..." + (i + 1).to_s + "/" + $raw_e.select{ |s| $ids_e.key?(tab) ? $ids_e[tab].include?(s[1]) : true }.size.to_s + "   \r"
   }
   puts "" unless $raw_e.size == 0
 
