@@ -184,6 +184,7 @@ def parse_savefile
 end
 
 def parse_errors
+  $errors = []
   if $lvls[:scored][:uncompleted].size != 0
     $errors << ["Found #{$lvls[:scored][:uncompleted].size.to_s.red} scored uncompleted levels.", $lvls[:scored][:uncompleted]]
   end
@@ -209,10 +210,10 @@ def print_usage
   puts "#{"USAGE".bold}: ruby nprofile_patcher.rb [#{"ARGUMENT".italic}]"
   puts "#{"ARGUMENTS".bold}:"
   puts "     scores - Shows your total level and episode scores."
-  puts "    summary - Provides a summary and finds errors."
+  puts "     update - Update all scores in savefile."
   puts "       list - Lists erroneous scores."
   puts "      patch - Correct missing scores in savefile."
-  puts " patch-full - Update all scores in savefile."
+  puts "    summary - Provides a summary and finds errors."
   puts "       exit - Exit the program."
   puts "#{"NOTES".bold}:"
   puts "    * Place the savefile on the script's folder to use."
@@ -284,14 +285,14 @@ rescue
   (att += 1) < $retries ? retry : (print("Server down, retry again later.\n"); return -1)
 end
 
-def patch_score(id, file, i, ep)
-  ret = download(id, i, ep)
+def patch_score(id, file, s, ep)
+  ret = download(id, s[1], ep)
   if ret == -1
     return false
   else
     return true if ret.nil?
-    r = ep ? r_e(i) : r_l(i)
-    file[combine_r(r, 36..39)] = _pack(ret['my_score']    , 4)
+    r = ep ? r_e(s[1]) : r_l(s[1])
+    file[combine_r(r, 36..39)] = _pack(ret['my_score']    , 4) unless s[10] < 1000 * $l && s[10] > ret['my_score'].to_i
     file[combine_r(r, 40..43)] = _pack(ret['my_rank']     , 4)
     file[combine_r(r, 44..47)] = _pack(ret['my_replay_id'], 4)
     File.binwrite("nprofile", file)
@@ -350,20 +351,20 @@ def patch_scores_full
   t = Time.now
 
   $raw_l.select{ |s| $ids_l.key?(tab) ? $ids_l[tab].include?(s[1]) : true }.each_with_index{ |s, i|
-    ok = patch_score(id, file, s[1], false) && ok
-    print "Patching all levels..." + (i + 1).to_s + "/" + $raw_l.select{ |s| $ids_l.key?(tab) ? $ids_l[tab].include?(s[1]) : true }.size.to_s + "   \r"
+    ok = patch_score(id, file, s, false) && ok
+    print "Updating all levels..." + (i + 1).to_s + "/" + $raw_l.select{ |s| $ids_l.key?(tab) ? $ids_l[tab].include?(s[1]) : true }.size.to_s + "   \r"
   }
   puts ""
 
   $raw_e.select{ |s| $ids_e.key?(tab) ? $ids_e[tab].include?(s[1]) : true }.each_with_index{ |s, i|
-    ok = patch_score(id, file, s[1], true) && ok
-    print "Patching all episodes..." + (i + 1).to_s + "/" + $raw_e.select{ |s| $ids_e.key?(tab) ? $ids_e[tab].include?(s[1]) : true }.size.to_s + "   \r"
+    ok = patch_score(id, file, s, true) && ok
+    print "Updating all episodes..." + (i + 1).to_s + "/" + $raw_e.select{ |s| $ids_e.key?(tab) ? $ids_e[tab].include?(s[1]) : true }.size.to_s + "   \r"
   }
   puts ""
 
   update_scores
-  message = success ? "successfully" : "partially"
-  print("nprofile patched #{message}, time: " + (1000 * (Time.now - t)).round(3).to_s + " ms.\n")
+  message = success ? "successfully".green : "partially".red
+  print("nprofile updated #{message}, time: " + (1000 * (Time.now - t)).round(3).to_s + " ms.\n")
   return true
 end
 
@@ -436,7 +437,7 @@ def main
           puts "nprofile file needs to be on the script's folder, and with that name."
           return
         end
-      when "patch-full"
+      when "update"
         if !patch_scores_full
           puts "nprofile file not found."
           puts "nprofile file needs to be on the script's folder, and with that name."
