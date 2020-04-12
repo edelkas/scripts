@@ -437,6 +437,12 @@ def main
           puts "nprofile file needs to be on the script's folder, and with that name."
           return
         end
+      when "patch-full"
+        if !patch_scores_full
+          puts "nprofile file not found."
+          puts "nprofile file needs to be on the script's folder, and with that name."
+          return
+        end
       when "update"
         if !patch_scores_full
           puts "nprofile file not found."
@@ -445,6 +451,8 @@ def main
         end
       when "scores"
         print_scores
+      when "quit"
+        return
       when "exit"
         return
       else
