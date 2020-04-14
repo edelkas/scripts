@@ -31,33 +31,6 @@ $lvls = {}
 $eps = {}
 $errors = []
 
-class String
-  def black;          "\e[30m#{self}\e[0m" end
-  def red;            "\e[31m#{self}\e[0m" end
-  def green;          "\e[32m#{self}\e[0m" end
-  def brown;          "\e[33m#{self}\e[0m" end
-  def blue;           "\e[34m#{self}\e[0m" end
-  def magenta;        "\e[35m#{self}\e[0m" end
-  def cyan;           "\e[36m#{self}\e[0m" end
-  def gray;           "\e[37m#{self}\e[0m" end
-
-  def bg_black;       "\e[40m#{self}\e[0m" end
-  def bg_red;         "\e[41m#{self}\e[0m" end
-  def bg_green;       "\e[42m#{self}\e[0m" end
-  def bg_brown;       "\e[43m#{self}\e[0m" end
-  def bg_blue;        "\e[44m#{self}\e[0m" end
-  def bg_magenta;     "\e[45m#{self}\e[0m" end
-  def bg_cyan;        "\e[46m#{self}\e[0m" end
-  def bg_gray;        "\e[47m#{self}\e[0m" end
-
-  def bold;           "\e[1m#{self}\e[22m" end
-  def italic;         "\e[3m#{self}\e[23m" end
-  def underline;      "\e[4m#{self}\e[24m" end
-  def blink;          "\e[5m#{self}\e[25m" end
-  def reverse_color;  "\e[7m#{self}\e[27m" end
-  def plain;      self.gsub /\e\[\d+m/, "" end
-end
-
 # To use this you need to send either a matrix or :sep
 def make_table(rows, sep_x = "=", sep_y = "|", sep_i = "x")
   text_rows = rows.select{ |r| r.is_a?(Array) }
@@ -186,42 +159,42 @@ end
 def parse_errors
   $errors = []
   if $lvls[:scored][:uncompleted].size != 0
-    $errors << ["Found #{$lvls[:scored][:uncompleted].size.to_s.red} scored uncompleted levels.", $lvls[:scored][:uncompleted]]
+    $errors << ["Found #{$lvls[:scored][:uncompleted].size.to_s} scored uncompleted levels.", $lvls[:scored][:uncompleted]]
   end
   if $lvls[:unscored][:completed].size != 0
-    $errors << ["Found #{$lvls[:unscored][:completed].size.to_s.red} unscored completed levels.", $lvls[:unscored][:completed]]
+    $errors << ["Found #{$lvls[:unscored][:completed].size.to_s} unscored completed levels.", $lvls[:unscored][:completed]]
   end
   if $raw_l.select{ |s| s[6] > 2 }.size > 0
-    $errors << ["Found #{$raw_l.select{ |s| s[6] > 2 }.size.to_s.red} levels with incorrect state (neither locked, unlocked nor beaten).", $raw_l.select{ |s| s[6] > 2 }.size]
+    $errors << ["Found #{$raw_l.select{ |s| s[6] > 2 }.size.to_s} levels with incorrect state (neither locked, unlocked nor beaten).", $raw_l.select{ |s| s[6] > 2 }.size]
   end
   if $eps[:scored][:uncompleted].size != 0
-    $errors << ["Found #{$eps[:scored][:uncompleted].size.to_s.red} scored uncompleted episodes.", $eps[:scored][:uncompleted]]
+    $errors << ["Found #{$eps[:scored][:uncompleted].size.to_s} scored uncompleted episodes.", $eps[:scored][:uncompleted]]
   end
   if $eps[:unscored][:completed].size != 0
-    $errors << ["Found #{$eps[:unscored][:completed].size.to_s.red} unscored completed episodes.", $eps[:unscored][:completed]]
+    $errors << ["Found #{$eps[:unscored][:completed].size.to_s} unscored completed episodes.", $eps[:unscored][:completed]]
   end
   if $raw_e.select{ |s| s[6] > 2 }.size > 0
-    $errors << ["Found #{$raw_e.select{ |s| s[6] > 2 }.size.to_s.red} episodes with incorrect state (neither locked, unlocked nor beaten).", $raw_e.select{ |s| s[6] > 2 }.size]
+    $errors << ["Found #{$raw_e.select{ |s| s[6] > 2 }.size.to_s} episodes with incorrect state (neither locked, unlocked nor beaten).", $raw_e.select{ |s| s[6] > 2 }.size]
   end
 end
 
 def print_usage
-  puts "#{"DESCRIPTION".bold}: A tool to analyze and patch errors in N++'s PC savefile."
-  puts "#{"USAGE".bold}: ruby nprofile_patcher.rb [#{"ARGUMENT".italic}]"
-  puts "#{"ARGUMENTS".bold}:"
+  puts "DESCRIPTION: A tool to analyze and patch errors in N++'s PC savefile."
+  #puts "USAGE: ruby nprofile_patcher.rb [ARGUMENT]"
+  puts "COMMANDS:"
   puts "     scores - Shows your total level and episode scores."
   puts "     update - Update all scores in savefile."
   puts "       list - Lists erroneous scores."
   puts "      patch - Correct missing scores in savefile."
   puts "    summary - Provides a summary and finds errors."
   puts "       exit - Exit the program."
-  puts "#{"NOTES".bold}:"
+  puts "NOTES:"
   puts "    * Place the savefile on the script's folder to use."
   puts "    * Please backup your savefile before patching it."
 end
 
 def print_errors
-  print("\nFound #{$errors.map{ |e| e[1].size }.sum.to_s.red} erroneous scores:\n")
+  print("\nFound #{$errors.map{ |e| e[1].size }.sum} erroneous scores:\n")
   $errors.each{ |e|
     print("* " + e[0] + "\n")
   }
@@ -335,7 +308,7 @@ def patch_scores
   puts "" unless $eps[:unscored][:completed].size == 0
 
   update_scores
-  message = ok ? "successfully".green : "partially".red
+  message = ok ? "successfully" : "partially"
   print("nprofile patched #{message}, time: " + (1000 * (Time.now - t)).round(3).to_s + " ms.\n")
   return true
 end
@@ -363,7 +336,7 @@ def patch_scores_full
   puts ""
 
   update_scores
-  message = success ? "successfully".green : "partially".red
+  message = success ? "successfully" : "partially"
   print("nprofile updated #{message}, time: " + (1000 * (Time.now - t)).round(3).to_s + " ms.\n")
   return true
 end
@@ -411,15 +384,28 @@ def main
     command = ARGV[0]
   end
   loop do
-    if !parse_savefile
-      puts "nprofile file not found."
-      puts "nprofile file needs to be on the script's folder, and with that name."
-      return
-    end
     if command.nil?
       print("Introduce command: ")
       command = STDIN.gets.chomp
     end
+
+    if !["patch", "update", "scores", "list", "summary", "exit", "quit", "patch-full"].include?(command)
+      print_usage
+      command = nil
+      next
+    end
+
+    if ["exit", "quit"].include?(command)
+      return
+    end
+
+    if !parse_savefile
+      puts "nprofile file not found."
+      puts "nprofile file needs to be on the script's folder, and with that name."
+      command = nil
+      next
+    end
+
     case command
       when "summary"
         print_tables
@@ -432,29 +418,13 @@ def main
           puts e[1].map{ |s| s[0] }.join(", ")
         }
       when "patch"
-        if !patch_scores
-          puts "nprofile file not found."
-          puts "nprofile file needs to be on the script's folder, and with that name."
-          return
-        end
+        if !patch_scores then puts "An error happened." end
       when "patch-full"
-        if !patch_scores_full
-          puts "nprofile file not found."
-          puts "nprofile file needs to be on the script's folder, and with that name."
-          return
-        end
+        if !patch_scores_full then puts "An error happened." end
       when "update"
-        if !patch_scores_full
-          puts "nprofile file not found."
-          puts "nprofile file needs to be on the script's folder, and with that name."
-          return
-        end
+        if !patch_scores_full then puts "An error happened." end
       when "scores"
         print_scores
-      when "quit"
-        return
-      when "exit"
-        return
       else
         print_usage
     end
