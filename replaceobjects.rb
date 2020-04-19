@@ -42,4 +42,4 @@ map[1150+2*input..1150+2*input+1] = [0.to_s(16).rjust(4,"0")].pack('H*').reverse
 current = map[1150+2*output..1150+2*output+1].reverse.unpack('H*')[0].to_i(16)
 map[1150+2*output..1150+2*output+1] = [(current+count).to_s(16).rjust(4,"0")].pack('H*').reverse
 File.binwrite(filename + "s", map.force_encoding("ascii-8bit"))
-puts "Success."
+puts "Success, #{count} objects changed."
