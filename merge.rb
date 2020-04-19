@@ -54,4 +54,4 @@ object_counts = object_counts.join
 map = maps[0][0..183] + tile_data + object_counts + object_data
 map[4..7] = [map.size.to_s(16).rjust(8, "0")].pack('H*').reverse
 File.binwrite("merge_result", map)
-print("Maps successfully merged into \'merge_result\'.")
+print("Maps successfully merged into \'merge_result\'.\n")
