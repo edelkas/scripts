@@ -184,7 +184,8 @@ def print_usage
   puts "COMMANDS:"
   puts "     scores - Shows your total level and episode scores."
   puts "     update - Update all scores in savefile."
-  puts "       list - Lists erroneous scores."
+  puts "       list - Lists all missing scores."
+  puts "     errors - Lists only erroneous scores."
   puts "      patch - Correct missing scores in savefile."
   puts "    summary - Provides a summary and finds errors."
   puts "       exit - Exit the program."
@@ -198,6 +199,22 @@ def print_errors
   $errors.each{ |e|
     print("* " + e[0] + "\n")
   }
+end
+
+def print_list(errors)
+  parse_errors
+  if errors
+    $errors.each{ |e|
+      puts "* " + e[0][0..-2] + ":"
+      puts e[1].map{ |s| s[0] }.join(", ")
+    }
+  else
+    puts "* All unscored levels: "
+    puts ($lvls[:unscored][:completed].map{ |s| s[0] } + $lvls[:unscored][:uncompleted].map{ |s| s[0] }).join(", ")
+    puts "* All unscored episodes: "
+    puts ($eps[:unscored][:completed].map{ |s| s[0] } + $eps[:unscored][:uncompleted].map{ |s| s[0] }).join(", ")
+  end
+  return true
 end
 
 def print_tables
@@ -265,6 +282,7 @@ def patch_score(id, file, s, ep)
   else
     return true if ret.nil?
     r = ep ? r_e(s[1]) : r_l(s[1])
+    file[combine_r(r, 20..23)] = _pack(2                  , 4)
     file[combine_r(r, 36..39)] = _pack(ret['my_score']    , 4) unless s[10] < 1000 * $l && s[10] > ret['my_score'].to_i
     file[combine_r(r, 40..43)] = _pack(ret['my_rank']     , 4)
     file[combine_r(r, 44..47)] = _pack(ret['my_replay_id'], 4)
@@ -291,18 +309,19 @@ def patch_scores
 
   $eps[:scored][:uncompleted].each_with_index{ |s, i|
     print "Patching scored uncompleted episodes... " + (i + 1).to_s + "/" + $eps[:scored][:uncompleted].size.to_s + "   \r"
-    file[combine_r(r_e(s[1]), 20..23)] = _pack(2,4) }
+    file[combine_r(r_e(s[1]), 20..23)] = _pack(2,4)
+  }
   File.binwrite("nprofile", file)
   puts "" unless $eps[:scored][:uncompleted].size == 0
 
   $lvls[:unscored][:completed].each_with_index{ |s, i|
-    ok = patch_score(id, file, s[1], false) && ok
+    ok = patch_score(id, file, s, false) && ok
     print "Patching unscored completed levels... " + (i + 1).to_s + "/" + $lvls[:unscored][:completed].size.to_s + "   \r"
   }
   puts "" unless $lvls[:unscored][:completed].size == 0
 
   $eps[:unscored][:completed].each_with_index{ |s, i|
-    ok = patch_score(id, file, s[1], true) && ok
+    ok = patch_score(id, file, s, true) && ok
     print "Patching unscored completed episodes... " + (i + 1).to_s + "/" + $eps[:unscored][:completed].size.to_s + "   \r"
   }
   puts "" unless $eps[:unscored][:completed].size == 0
@@ -389,7 +408,7 @@ def main
       command = STDIN.gets.chomp
     end
 
-    if !["patch", "update", "scores", "list", "summary", "exit", "quit", "patch-full"].include?(command)
+    if !["patch", "update", "scores", "list", "summary", "exit", "quit", "patch-full", "errors"].include?(command)
       print_usage
       command = nil
       next
@@ -412,11 +431,9 @@ def main
         parse_errors
         print_errors
       when "list"
-        parse_errors
-        $errors.each{ |e|
-          puts "* " + e[0][0..-2] + ":"
-          puts e[1].map{ |s| s[0] }.join(", ")
-        }
+        if !print_list(false) then puts "An error happened." end
+      when "errors"
+        if !print_list(true) then puts "An error happened." end
       when "patch"
         if !patch_scores then puts "An error happened." end
       when "patch-full"
