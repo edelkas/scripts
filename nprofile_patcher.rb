@@ -289,7 +289,7 @@ def patch_score(id, file, s, ep)
     secrets = (1800..1919).to_a + (3000..3119).to_a
     if (s[1] + 1) % 5 != 0 && !secrets.include?(s[1] + 1)
       r = ep ? r_e(s[1] + 1) : r_l(s[1] + 1)
-      file[combine_r(r, 20..23)] = _pack(1                , 4)
+      file[combine_r(r, 20..23)] = _pack(1                , 4) unless _unpack(file[combine_r(r, 20..23)]) == 2
     end
     File.binwrite("nprofile", file)
     print "."
