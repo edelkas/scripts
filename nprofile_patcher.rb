@@ -286,6 +286,11 @@ def patch_score(id, file, s, ep)
     file[combine_r(r, 36..39)] = _pack(ret['my_score']    , 4) unless s[10] < 1000 * $l && s[10] > ret['my_score'].to_i
     file[combine_r(r, 40..43)] = _pack(ret['my_rank']     , 4)
     file[combine_r(r, 44..47)] = _pack(ret['my_replay_id'], 4)
+    secrets = (1800..1919).to_a + (3000..3119).to_a
+    if (s[1] + 1) % 5 != 0 && !secrets.include?(s[1] + 1)
+      r = ep ? r_e(s[1] + 1) : r_l(s[1] + 1)
+      file[combine_r(r, 20..23)] = _pack(1                , 4)
+    end
     File.binwrite("nprofile", file)
     print "."
     return true
