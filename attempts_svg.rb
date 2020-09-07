@@ -9,7 +9,9 @@ o_e = "8F7920".to_i(16)
 n_l = 3120
 n_e = 600
 d = 48
-limit = 20
+limit = 100
+$x_dim = 800
+$y_dim = 25 * limit
 
 # Map episode and level names to IDs
 def ids(tab, offset, n, ep, x)
@@ -63,8 +65,8 @@ data_e = data_e.take(limit)
 # Bar plot (SVG)
 def create_svg(filename, title, x, y, data, labels)
   options = {
-    :width             => 800,
-    :height            => 500,
+    :width             => $x_dim,
+    :height            => $y_dim,
     :stack             => :side,  # the stack option is valid for Bar graphs only
     :fields            => labels,
     :graph_title       => title,
