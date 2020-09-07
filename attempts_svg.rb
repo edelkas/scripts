@@ -9,7 +9,7 @@ o_e = "8F7920".to_i(16)
 n_l = 3120
 n_e = 600
 d = 48
-limit = 100
+limit = ARGV[0].to_i != 0 ? ARGV[0].to_i : 100
 $x_dim = 800
 $y_dim = 25 * limit
 
