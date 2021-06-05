@@ -5,8 +5,8 @@ require 'date'
 f = CSV.read("userlevels.csv")
 d = f.select{ |l| l[1].to_i == 234533 }.map{ |l| l[5] }
 
-date1 = DateTime.new(2019,11,2)
-date2 = DateTime.new(2020,7,7)
+date1 = DateTime.new(2019,11,1)
+date2 = DateTime.new(2020,12,18)
 dates = (date1..date2).to_a.map{ |d|
   s = d.to_s
   s = s[8..9] + "/" + s[5..6] + "/" + s[2..3]

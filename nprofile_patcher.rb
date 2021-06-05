@@ -1,6 +1,8 @@
 require 'open-uri'
 require 'json'
 
+UPDATE_HIGHER = false # Updates local scores with server scores even if they're higher locally
+
 # Constants
 $o_l = "80D320".to_i(16)
 $o_e = "8F7920".to_i(16)
@@ -283,7 +285,11 @@ def patch_score(id, file, s, ep)
     return true if ret.nil?
     r = ep ? r_e(s[1]) : r_l(s[1])
     file[combine_r(r, 20..23)] = _pack(2                  , 4)
-    file[combine_r(r, 36..39)] = _pack(ret['my_score']    , 4) unless s[10] < 1000 * $l && s[10] > ret['my_score'].to_i
+    if !UPDATE_HIGHER && s[10] < 1000 * $l && s[10] > ret['my_score'].to_i
+      puts "Found correct unsubmitted score at #{s[0]}"
+    else
+      file[combine_r(r, 36..39)] = _pack(ret['my_score']    , 4)
+    end
     file[combine_r(r, 40..43)] = _pack(ret['my_rank']     , 4)
     file[combine_r(r, 44..47)] = _pack(ret['my_replay_id'], 4)
     secrets = (1800..1919).to_a + (3000..3119).to_a
