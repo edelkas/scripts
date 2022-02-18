@@ -39,7 +39,7 @@ ids_l = ids_l.each_with_index.map{ |l, i| [i, l] }.to_h.select{ |i, l| l != "" }
 $file = File.binread("nprofile")
 data_l = ids_l.each{ |id, l|
   if (!(id.between?(1100,1199) || id.between?(1700,1799) || id.between?(2900,2999)))
-    $file[o_l + id * d + 20] = "\x02".force_encoding("ASCII-8BIT")
+    $file[o_l + id * d + 20] = "\x01".force_encoding("ASCII-8BIT")
   else
     $file[o_l + id * d + 20] = "\x01".force_encoding("ASCII-8BIT")
   end
@@ -49,10 +49,9 @@ data_l = ids_l.each{ |id, l|
 }
 data_e = ids_e.each{ |id, e|
   if (!(id.between?(220,239) || id.between?(340,359) || id.between?(580,599)))
-    $file[o_e + id * d + 20] = "\x02".force_encoding("ASCII-8BIT")
+    $file[o_e + id * d + 20] = "\x01".force_encoding("ASCII-8BIT")
   else
     $file[o_e + id * d + 20] = "\x01".force_encoding("ASCII-8BIT")
   end
 }
 File.binwrite("nprofileU", $file)
-
