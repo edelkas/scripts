@@ -48,6 +48,32 @@ def depatch
   puts 'Depatched'
 end
 
+def read(client)
+  req = ""
+  begin
+    req << client.read_nonblock(16 * 1024)
+  rescue Errno::EAGAIN
+    retry if IO.select([client], nil, nil, 1)
+  rescue
+  end
+  req
+end
+
+def clear_headers(http)
+  http.delete('accept-encoding')
+  http.delete('accept')
+  http.delete('user-agent')
+  http.delete('host')
+  http.delete('content-length')
+  http.delete('content-type')
+  http
+end
+
+def log(line)
+  method, path, protocol = line.split  
+  puts "#{"%-4s" % method} #{path.split('?')[0].split('/')[-1]}"
+end
+
 def intercept
   IO.binread('query_hardest')
 end
@@ -64,14 +90,20 @@ def forward(req)
   else
     raise "Unknown HTTP method requested by N++"
   end
+  reqNew = clear_headers(reqNew)
   req.split("\r\n\r\n")[0].split("\r\n")[1..-1].map{ |h| h.split(": ") }.each{ |h|
     reqNew[h[0]] = h[1]
   }
   reqNew['host'] = $target[8..-1]
   reqNew.body = req.split("\r\n\r\n")[1..-1].join("\r\n\r\n")
   # Execute proxied request
-  res = Net::HTTP.start(uri.host, uri.port, use_ssl: true, read_timeout: 2){ |http|
-    http.request(reqNew)
+  res = ""
+  f = File.open("req2", "wb"){ |f|
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.read_timeout = 2
+    http.set_debug_output(f)
+    res = http.start{ |http| http.request(reqNew) }
   }
   # Build proxied response
   status = "HTTP/1.1 #{res.code} #{res.msg}\r\n"
@@ -85,25 +117,21 @@ def startup
   puts 'Started'
 end
 
-# TODO: Log different queries to the console (log, submit, scores, etc)
 def loop
   client = $socket.accept
   req = client.gets
+  log(req)
   method, path, protocol = req.split
-  bench(:start)
-  req << client.read
-  bench(:step)
-  IO.binwrite('req', req)
+  req << read(client)
+  IO.binwrite('req1', req)
   if method == 'GET' && path.split('?')[0].split('/')[-1] == 'query_levels'
     res = intercept
   else
     res = forward(req)
   end
   IO.binwrite('res', res)
-  bench(:step)
   client.write(res)
   client.close
-  bench(:step)
 end
 
 def shutdown
