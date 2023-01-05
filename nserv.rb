@@ -1,7 +1,13 @@
 require 'net/http'
 require 'socket'
 
-EXPORT = false
+# TODO:
+# - Create cache system, storing userlevel files in a big binary, using a hash
+#   encoding all search query terms to determine if that query is cached or not.
+# - Create new field in UserlevelData table of outte's db to contain the Zlibbed
+#   block and header, ready to be dumped in the final file.
+
+EXPORT = false # Export raw HTTP requests and responses, for debugging
 
 $port   = 8124
 $target = "https://dojo.nplusplus.ninja"
