@@ -6,8 +6,11 @@ require 'socket'
 #   encoding all search query terms to determine if that query is cached or not.
 # - Create new field in UserlevelData table of outte's db to contain the Zlibbed
 #   block and header, ready to be dumped in the final file.
+# - Use actual request to deduce mode and tab, so that we set it correctly to
+#   inject it wherever the user is.
 
-EXPORT = false # Export raw HTTP requests and responses, for debugging
+EXPORT    = false # Export raw HTTP requests and responses, for debugging
+INTERCEPT = false # Whether to intercept of forward userlevel requests
 
 $port   = 8124
 $target = "https://dojo.nplusplus.ninja"
@@ -65,8 +68,7 @@ def log(line)
 end
 
 def intercept(req)
-  #IO.binread('query')
-  forward(req)
+  INTERCEPT ? IO.binread('query') : forward(req)
 end
 
 def forward(req)
