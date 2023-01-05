@@ -1,29 +1,13 @@
-require 'byebug'
 require 'net/http'
 require 'socket'
+
+EXPORT = false
 
 $port   = 8124
 $target = "https://dojo.nplusplus.ninja"
 $proxy  = "http://localhost:#{$port}".ljust($target.length, "\x00")
 $socket = nil
-
-def bench(action)
-  @t ||= Time.now
-  @total ||= 0
-  @step ||= 0
-  case action
-  when :start
-    @step = 0
-    @total = 0
-    @t = Time.now
-  when :step
-    @step += 1
-    int = Time.now - @t
-    @total += int
-    @t = Time.now
-    puts("Benchmark #{@step}: #{"%.3fms" % (int * 1000)} (Total: #{"%.3fms" % (@total * 1000)}).")
-  end
-end
+$count  = 0
 
 def clear
   print "\r".ljust(80, ' ') + "\r"
@@ -74,8 +58,9 @@ def log(line)
   puts "#{"%-4s" % method} #{path.split('?')[0].split('/')[-1]}"
 end
 
-def intercept
-  IO.binread('query_hardest')
+def intercept(req)
+  #IO.binread('query')
+  forward(req)
 end
 
 def forward(req)
@@ -98,13 +83,13 @@ def forward(req)
   reqNew.body = req.split("\r\n\r\n")[1..-1].join("\r\n\r\n")
   # Execute proxied request
   res = ""
-  f = File.open("req2", "wb"){ |f|
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.read_timeout = 2
-    http.set_debug_output(f)
-    res = http.start{ |http| http.request(reqNew) }
-  }
+  f = File.open("req2_#{$count}", "wb") if EXPORT
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  http.read_timeout = 2
+  http.set_debug_output(f) if EXPORT
+  res = http.start{ |http| http.request(reqNew) }
+  f.close if EXPORT
   # Build proxied response
   status = "HTTP/1.1 #{res.code} #{res.msg}\r\n"
   headers = res.to_hash.map{ |k, v| "#{k}: #{v[0]}\r\n" }.join
@@ -120,16 +105,17 @@ end
 def loop
   client = $socket.accept
   req = client.gets
+  $count += 1
   log(req)
   method, path, protocol = req.split
   req << read(client)
-  IO.binwrite('req1', req)
+  IO.binwrite("req1_#{$count}", req) if EXPORT
   if method == 'GET' && path.split('?')[0].split('/')[-1] == 'query_levels'
-    res = intercept
+    res = intercept(req)
   else
     res = forward(req)
   end
-  IO.binwrite('res', res)
+  IO.binwrite("res_#{$count}", res) if EXPORT
   client.write(res)
   client.close
 end
