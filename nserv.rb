@@ -9,8 +9,11 @@ require 'socket'
 # - Use actual request to deduce mode and tab, so that we set it correctly to
 #   inject it wherever the user is.
 
-EXPORT    = false # Export raw HTTP requests and responses, for debugging
-INTERCEPT = false # Whether to intercept of forward userlevel requests
+EXPORT     = false # Export raw HTTP requests and responses, for debugging
+EXPORT_REQ = false
+EXPORT_DBG = false
+EXPORT_RES = false
+INTERCEPT  = true  # Whether to intercept or forward userlevel requests
 
 $port   = 8124
 $target = "https://dojo.nplusplus.ninja"
@@ -68,7 +71,15 @@ def log(line)
 end
 
 def intercept(req)
-  INTERCEPT ? IO.binread('query') : forward(req)
+  return forward(req) if !INTERCEPT
+  body = IO.binread('query')
+  status = "HTTP/1.1 200 OK\r\n"
+  headers = {
+    'content-type'   => 'application/octet-stream',
+    'content-length' => body.size.to_s,
+    'connection'     => 'keep-alive'
+  }.map{ |k, v| "#{k}: #{v}\r\n" }.join
+  "#{status}#{headers}\r\n#{body}"
 end
 
 def forward(req)
@@ -91,13 +102,13 @@ def forward(req)
   reqNew.body = req.split("\r\n\r\n")[1..-1].join("\r\n\r\n")
   # Execute proxied request
   res = ""
-  f = File.open("req2_#{$count}", "wb") if EXPORT
+  f = File.open("dbg_#{$count}", "wb") if EXPORT || EXPORT_DBG
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   http.read_timeout = 2
-  http.set_debug_output(f) if EXPORT
+  http.set_debug_output(f) if EXPORT || EXPORT_DBG
   res = http.start{ |http| http.request(reqNew) }
-  f.close if EXPORT
+  f.close if EXPORT || EXPORT_DBG
   # Build proxied response
   status = "HTTP/1.1 #{res.code} #{res.msg}\r\n"
   headers = res.to_hash.map{ |k, v| "#{k}: #{v[0]}\r\n" }.join
@@ -117,13 +128,13 @@ def loop
   log(req)
   method, path, protocol = req.split
   req << read(client)
-  IO.binwrite("req1_#{$count}", req) if EXPORT
+  IO.binwrite("req_#{$count}", req) if EXPORT || EXPORT_REQ
   if method == 'GET' && path.split('?')[0].split('/')[-1] == 'query_levels'
     res = intercept(req)
   else
     res = forward(req)
   end
-  IO.binwrite("res_#{$count}", res) if EXPORT
+  IO.binwrite("res_#{$count}", res) if EXPORT || EXPORT_RES
   client.write(res)
   client.close
 end
