@@ -2,6 +2,8 @@ require 'net/http'
 require 'socket'
 
 # TODO:
+# - Some queries are failing ("for hi", "for house")
+# - Figure out additional header fields
 # - Create cache system, storing userlevel files in a big binary, using a hash
 #   encoding all search query terms to determine if that query is cached or not.
 # - Create new field in UserlevelData table of outte's db to contain the Zlibbed
@@ -11,6 +13,7 @@ require 'socket'
 #   we send chunks of 25, but when you get to the bottom, the game requests the next
 #   page, and we parse that.
 # - Look into the userlevel cache, perhaps we can disable it.
+# - Make program check Github regularly for new versions, possibly even auto-update
 # NOTES (for vid/tut):
 # - Levels are cached, so switch tab / search / wait
 # - If program exits badly, reopen and reclose to repatch library
