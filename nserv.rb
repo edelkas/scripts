@@ -5,13 +5,15 @@ require 'socket'
 # - Create cache system, storing userlevel files in a big binary, using a hash
 #   encoding all search query terms to determine if that query is cached or not.
 # - Create new field in UserlevelData table of outte's db to contain the Zlibbed
-#   block and header, ready to be dumped in the final file.
-# - Use actual request to deduce mode and tab, so that we set it correctly to
-#   inject it wherever the user is.
+#   block and header, ready to be dumped in the final file, for efficiency.
 # - What happens when you switch userlevel tabs very quickly? (sockets closing, etc).
 # - Implement page browsing in-game (i.e., instead of having to reinject each page,
 #   we send chunks of 25, but when you get to the bottom, the game requests the next
 #   page, and we parse that.
+# - Look into the userlevel cache, perhaps we can disable it.
+# NOTES (for vid/tut):
+# - Levels are cached, so switch tab / search / wait
+# - If program exits badly, reopen and reclose to repatch library
 
 EXPORT     = false # Export raw HTTP requests and responses, for debugging
 EXPORT_REQ = false
@@ -25,7 +27,7 @@ $port_outte    = 8125
 $target        = "https://dojo.nplusplus.ninja"
 $proxy         = "http://localhost:#{$port_npp}".ljust($target.length, "\x00")
 $outte         = TEST ? "127.0.0.1" : "45.32.150.168"
-$timeout_npp   = 1
+$timeout_npp   = 0.25
 $timeout_outte = 5
 $socket        = nil
 $res           = nil
@@ -73,7 +75,11 @@ end
 def read(client, npp)
   req = ""
   begin
-    req << client.read_nonblock(16 * 1024)
+    if !npp
+      req << client.read
+    else
+      req << client.read_nonblock(16 * 1024) while true
+    end
   rescue Errno::EAGAIN
     if IO.select([client], nil, nil, npp ? $timeout_npp : $timeout_outte)
       retry
@@ -111,9 +117,7 @@ def empty_query(pars)
 end
 
 def parse_params(path)
-  pars = path.split('?').last.split('&').map{ |p| p.split('=') }.to_h
-  pars.delete('steam_auth')
-  pars
+  path.split('?').last.split('&').map{ |p| p.split('=') }.to_h
 end
 
 # TODO: Add more integrity checks (map count, block lengths, etc)
