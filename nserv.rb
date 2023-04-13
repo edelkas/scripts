@@ -4,6 +4,7 @@ require 'socket'
 # TODO:
 # - Some queries are failing ("for hi", "for house")
 # - Figure out additional header fields
+# - Extra filters: start date, end date, 0th owner, etc.
 # - Create cache system, storing userlevel files in a big binary, using a hash
 #   encoding all search query terms to determine if that query is cached or not.
 # - Create new field in UserlevelData table of outte's db to contain the Zlibbed
@@ -22,7 +23,7 @@ EXPORT     = false # Export raw HTTP requests and responses, for debugging
 EXPORT_REQ = false
 EXPORT_DBG = false
 EXPORT_RES = false
-INTERCEPT  = true  # Whether to intercept or forward userlevel requests
+INTERCEPT  = true # Whether to intercept or forward userlevel requests
 TEST       = true  # Use test outte (at localhost)
 
 $port_npp      = 8124
