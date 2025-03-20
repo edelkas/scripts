@@ -3,7 +3,7 @@
 # @desc:   This script generates a tab file ready to import to N++.
 # @author: Eddy
 # @date:   2020-Sep-28
-# @update: 2023-Feb-18
+# @update: 2025-Feb-24
 #
 # USAGE:
 # 1) Put all levels in a folder called "levels", and nothing else inside.
@@ -93,6 +93,10 @@ module Enumerable
   end
 end
 
+def parse_str(str)
+  str.split("\x00")[0].bytes.reject{ |b| b < 32 || b >= 127 }.map(&:chr).join.force_encoding('UTF-8').scrub('').strip
+end
+
 # <---------------------------------------------------------------------------->
 #                               PARSING MAPS
 # <---------------------------------------------------------------------------->
@@ -141,7 +145,7 @@ def parse_file(filename: "", type: "level")
   case type
   when "level"
     mode = file[12].reverse.hd # game mode: 0 = solo, 1 = coop, 2 = race, 4 = unset
-    title = file[38..165].split(//).delete_if{ |b| b == "\x00" }.join
+    title = parse_str(file[38..165])
     author = ""
     map = parse_map(data: file[184..-1], type: "new")
     return nil if map.nil?
@@ -152,7 +156,7 @@ def parse_file(filename: "", type: "level")
     demo_data = file[8 + map_length .. 8 + map_length + demo_length - 1]
 
     level_id = map_data[0..3].reverse.hd
-    title = map_data[30..157].split(//).delete_if{ |b| b == "\x00" }.join
+    title = parse_str(map_data[30..157])
     index = map_data[159..-1].split(//).find_index("\x00") + 158
     author = map_data[159..index]
     map = parse_map(data: map_data[index + 2..-1], type: "new")
